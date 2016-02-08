@@ -2,9 +2,9 @@ os: Visual Studio 2015
 
 environment:
   matrix:
-    - CLI_ALIAS: latest
     - CLI_ALIAS: rel-1.0.0
       CLI_REPO_URL: https://github.com/dotnet/cli/archive/rel/1.0.0.zip
+    - CLI_ALIAS: latest
 
 init:
 build_script:
