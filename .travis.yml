@@ -1,0 +1,25 @@
+language: c++
+
+#dotnet cli require Ubuntu 14.04
+sudo: required
+dist: trusty
+
+addons:
+  apt:
+    packages:
+    - gettext
+    - libcurl4-openssl-dev
+    - libicu-dev
+    - libssl-dev
+    - libunwind8
+    - zlib1g
+
+before_install:
+  - if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
+
+os:
+  - linux
+  - osx
+
+script:
+  - ./scripts/ci-build.sh
