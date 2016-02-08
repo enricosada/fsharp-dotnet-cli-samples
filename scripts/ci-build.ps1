@@ -32,3 +32,11 @@ $useCliAlias = [io.path]::combine($repoDir, 'scripts', 'use-dev.ps1')
 
 $dotnetExe = (Get-Command dotnet).Path
 Write-Host "using dotnet '$dotnetExe'"
+
+# restore and compile
+
+Push-Location "$repoDir\HelloConsole"
+
+dotnet restore
+
+dotnet build
