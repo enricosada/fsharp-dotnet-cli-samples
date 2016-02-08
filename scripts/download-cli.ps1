@@ -59,7 +59,7 @@ Write-Host "Copying built dotnet cli to '$outDir' from '$dotnetcliArtifacts'"
 
 md -Force $outDir
 
-Copy-Item -Path "$dotnetcliArtifacts" -Filter "*" -Destination "$outDir" -Recurse
+Copy-Item -Path "$dotnetcliArtifacts\*" -Destination "$outDir" -Recurse
 
 # done
 Write-Host "Done."
