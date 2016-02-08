@@ -1,0 +1,22 @@
+os: Visual Studio 2015
+
+environment:
+  matrix:
+    - CLI_ALIAS: latest
+    - CLI_ALIAS: rel-1.0.0
+      CLI_REPO_URL: https://github.com/dotnet/cli/archive/rel/1.0.0.zip
+      
+
+init:
+build_script:
+  - cmd: echo %CLI_ALIAS%
+  - ps: |
+    if ($Env:CLI_REPO_URL) {
+        ".\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -repoZipUrl $Env:CLI_REPO_URL"
+    } else {
+        ".\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -latestBinaries"
+    }
+    
+
+test: off 
+version: 0.0.1.{build} 
