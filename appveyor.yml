@@ -11,9 +11,9 @@ build_script:
   - cmd: echo %CLI_ALIAS%
   - ps: >-
       if ($Env:CLI_REPO_URL) {
-          ".\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -repoZipUrl $Env:CLI_REPO_URL"
+          . .\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -repoZipUrl $Env:CLI_REPO_URL
       } else {
-          ".\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -latestBinaries"
+          . .\scripts\ci-build.ps1 -cliAlias $Env:CLI_ALIAS -latestBinaries
       }
     
 
