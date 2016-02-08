@@ -4,6 +4,10 @@ param( [string] $cliAlias, [string] $repoZipUrl, [switch] $latestBinaries )
 #make path absolute
 $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 
+# check current dotnet
+
+Write-Host "current dotnet '$((Get-Command dotnet).Path)'"
+
 # download and build cli
 if ($PSBoundParameters.ContainsKey('repoZipUrl')) 
 {
