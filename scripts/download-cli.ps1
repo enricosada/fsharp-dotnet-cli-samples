@@ -19,7 +19,10 @@ $outDir = [io.path]::combine($repoDir, $outDir)
 #cleanup
 Write-Host "cleanup '$tempPath'"
 
-rm -Recurse $tempRepoDir
+if (Test-Path $outDir)
+{
+	rm -Recurse $tempRepoDir
+}
 
 #download repository
 
