@@ -32,15 +32,7 @@ $useCliAlias = [io.path]::combine($repoDir, 'scripts', 'use-dev.ps1')
 
 . $useCliAlias $cliAlias
 
-# check dotnet exe
+# run tests
 
-$dotnetExe = (Get-Command dotnet).Path
-Write-Host "using dotnet '$dotnetExe'"
-
-# restore and compile
-
-Push-Location "$repoDir\HelloConsole"
-
-dotnet restore
-
-dotnet build
+$runTestScript = [io.path]::combine($repoDir, 'scripts', 'run-tests.ps1')
+. $runTestScript
