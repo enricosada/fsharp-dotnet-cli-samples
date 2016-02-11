@@ -3,8 +3,8 @@ $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 
 # check dotnet exe
 
-$dotnetExe = (Get-Command dotnet).Path
-Write-Host "using dotnet '$dotnetExe'"
+try { Write-Host "current dotnet '$((Get-Command dotnet).Path)'" }
+catch { Write-Host "dotnet.exe not found" }
 
 # restore and compile
 
