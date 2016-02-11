@@ -6,8 +6,12 @@ $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 
 # check current dotnet
 
-try { Write-Host "current dotnet '$((Get-Command dotnet).Path)'" }
-catch { Write-Host "dotnet.exe not found" }
+if (Get-Command dotnet -errorAction SilentlyContinue) {
+	Write-Host "current dotnet '$((Get-Command dotnet).Path)'"
+}
+else {
+	Write-Host "dotnet.exe not found"
+}
 
 # download and build cli
 if ($PSBoundParameters.ContainsKey('repoZipUrl')) 
@@ -33,8 +37,12 @@ $useCliAlias = [io.path]::combine($repoDir, 'scripts', 'use-dev.ps1')
 
 . $useCliAlias $cliAlias
 
-try { Write-Host "current dotnet '$((Get-Command dotnet).Path)'" }
-catch { Write-Host "dotnet.exe not found" }
+if (Get-Command dotnet -errorAction SilentlyContinue) {
+	Write-Host "current dotnet '$((Get-Command dotnet).Path)'"
+}
+else {
+	Write-Host "dotnet.exe not found"
+}
 
 # run tests
 
