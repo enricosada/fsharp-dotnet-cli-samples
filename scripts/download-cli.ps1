@@ -9,8 +9,6 @@
 
 param( [string] $repoZipUrl, [string] $outDir )
 
-$ErrorActionPreference = "Stop"
-
 #make path absolute
 $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 $tempRepoDir = [io.path]::combine($repoDir, ".dotnetrepo")

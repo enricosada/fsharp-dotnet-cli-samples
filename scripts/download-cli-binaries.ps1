@@ -4,8 +4,6 @@
 
 param( [string] $outDir )
 
-$ErrorActionPreference = "Stop"
-
 $cliLatestPackage = "https://dotnetcli.blob.core.windows.net/dotnet/dev/Binaries/Latest/dotnet-win-x64.latest.zip"
 
 #make path absolute
