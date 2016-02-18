@@ -17,16 +17,16 @@ install:
   - ps: >-
       $root = "$pwd"
       if ($env:CLI_REPO_URL) {
-          # download an build dotnet cli from sources
-          download-and-build-cli.ps1 -repoZipUrl $env:CLI_REPO_URL -outDir ".dotnetcli\$env:CLI_ALIAS"
+          Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'"
+          .\scripts\download-and-build-cli.ps1 -RepoZipUrl "$env:CLI_REPO_URL" -OutDir "$root\.dotnet\$env:CLI_ALIAS"
       } else {
           Write-Host "download binaries '$env:CLI_BINARIES_VERSION' as '$env:CLI_ALIAS'"
-          .\scripts\download-cli-binaries.ps1 -OutDir "$root\.dotnet\$env:CLI_ALIAS" -Version $env:CLI_BINARIES_VERSION -InstallScriptDir "$root\scripts\obtain"
+          .\scripts\download-cli-binaries.ps1 -OutDir "$root\.dotnet\$env:CLI_ALIAS" -Version "$env:CLI_BINARIES_VERSION" -InstallScriptDir "$root\scripts\obtain"
       }
 
 build_script:
   - ps: show-dotnet-info.ps1
-  - ps: $runTestScript
+  - ps: scripts\run-tests.ps1
 
 
 test: off 

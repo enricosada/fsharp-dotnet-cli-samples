@@ -1,15 +1,6 @@
 #make path absolute
 $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 
-# check dotnet exe
-
-if (Get-Command dotnet -errorAction SilentlyContinue) {
-	Write-Host "current dotnet '$((Get-Command dotnet).Path)'"
-}
-else {
-	Write-Host "dotnet.exe not found"
-}
-
 # restore and compile
 
 Push-Location "$repoDir\HelloConsole"

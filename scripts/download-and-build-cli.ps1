@@ -1,28 +1,6 @@
-<# Copyright (c) Microsoft Open Technologies, Inc.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information. #>
+<# Download, build and install the dotnet cli #>
 
-<# Download and install the dotnet cli #>
-
-# $cliLatestPackage = "https://dotnetcli.blob.core.windows.net/dotnet/dev/Binaries/Latest/dotnet-win-x64.latest.zip"
-
-# $zip_branch = "https://github.com/dotnet/cli/archive/rel/1.0.0.zip"
-# $zip_commit = "https://github.com/dotnet/cli/archive/168bfc677803c70ed477a5c72ca703198c1f8848.zip"
-
-param( [string] $repoZipUrl, [string] $outDir )
-
-Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'"
-
-#make path absolute
-$repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
-$tempRepoDir = [io.path]::combine($repoDir, ".dotnetrepo")
-$outDir = [io.path]::combine($repoDir, $outDir)
-
-#cleanup
-Write-Host "cleanup '$tempPath'"
-
-if (Test-Path $outDir)
-{
-	rm -Recurse $tempRepoDir
-}
+param( [string] $RepoZipUrl, [string] $OutDir )
 
 #download repository
 
@@ -30,20 +8,18 @@ $tempPath = [System.IO.Path]::GetTempFileName()
 
 Write-Host "Temp zip path '$tempPath'"
 
-Invoke-WebRequest -UseBasicParsing $repoZipUrl -OutFile $tempPath
+Invoke-WebRequest -UseBasicParsing $RepoZipUrl -OutFile $tempPath
 
 # extract zip
 
-Write-Host "Extract zip to '$tempRepoDir'"
+Write-Host "Extract zip to '$OutDir'"
 
-md -Force $tempRepoDir
+md -Force $OutDir
 
 Add-Type -assembly "system.io.compression.filesystem"
-[io.compression.zipfile]::ExtractToDirectory($tempPath, $tempRepoDir)
+[io.compression.zipfile]::ExtractToDirectory($tempPath, $OutDir)
 
-$tempRepoName = Split-Path -leaf (gci -Path $tempRepoDir | Select-Object -First 1)
-
-$unzippedRepoDir = [io.path]::combine($tempRepoDir, $tempRepoName)
+$unzippedRepoDir = gci -Path "$OutDir" | % { $_.FullName } | Select-Object -First 1
 
 # execute build.cmd
 
@@ -52,19 +28,10 @@ Write-Host "Executing build.cmd in downloaded repo ('$buildCmdPath')..."
 
 cmd /c $buildCmdPath
 
-# copy dotnet cli to $outDir
-
-$dotnetcliArtifacts = [io.path]::combine($unzippedRepoDir, 'artifacts\win7-x64\stage2')
-Write-Host "Copying built dotnet cli to '$outDir' from '$dotnetcliArtifacts'"
-
-md -Force $outDir
-
-Copy-Item -Path "$dotnetcliArtifacts\*" -Destination "$outDir" -Recurse
-
 # use dotnet cli
-Write-Host "use alias '$cliAlias'"
+#Write-Host "use alias '$cliAlias'"
 
-. "$repoDir\scripts\use-dev.ps1" $cliAlias
+#. "$repoDir\scripts\use-dev.ps1" $cliAlias
 
 # done
 Write-Host "Done."
