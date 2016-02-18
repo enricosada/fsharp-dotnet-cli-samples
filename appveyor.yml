@@ -13,7 +13,7 @@ environment:
 
 install:
   - ps: Write-Host $env:CLI_ALIAS
-  - ps: show-dotnet-info.ps1
+  - ps: .\scripts\show-dotnet-info.ps1
   - ps: >-
       $root = "$pwd"
       if ($env:CLI_REPO_URL) {
@@ -25,8 +25,8 @@ install:
       }
 
 build_script:
-  - ps: show-dotnet-info.ps1
-  - ps: scripts\run-tests.ps1
+  - ps: .\scripts\show-dotnet-info.ps1
+  - ps: .\scripts\run-tests.ps1
 
 
 test: off 
