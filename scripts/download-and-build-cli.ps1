@@ -9,6 +9,8 @@
 
 param( [string] $repoZipUrl, [string] $outDir )
 
+Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'"
+
 #make path absolute
 $repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 $tempRepoDir = [io.path]::combine($repoDir, ".dotnetrepo")
@@ -58,6 +60,11 @@ Write-Host "Copying built dotnet cli to '$outDir' from '$dotnetcliArtifacts'"
 md -Force $outDir
 
 Copy-Item -Path "$dotnetcliArtifacts\*" -Destination "$outDir" -Recurse
+
+# use dotnet cli
+Write-Host "use alias '$cliAlias'"
+
+. "$repoDir\scripts\use-dev.ps1" $cliAlias
 
 # done
 Write-Host "Done."

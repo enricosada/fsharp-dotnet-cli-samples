@@ -4,6 +4,7 @@
 .dotnetrepo
 test/test-dotnet-new/*
 .dotnet
+scripts/obtain/install*
 
 # User-specific files
 *.suo

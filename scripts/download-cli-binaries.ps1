@@ -1,37 +1,16 @@
-<# Copyright (c) Microsoft Open Technologies, Inc.  All Rights Reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information. #>
-
 <# Download and install the dotnet cli #>
 
-param( [string] $outDir )
+param( [string] $OutDir, [string] $Version, [string] $InstallScriptDir )
 
-$cliLatestPackage = "https://dotnetcli.blob.core.windows.net/dotnet/dev/Binaries/Latest/dotnet-win-x64.latest.zip"
+# download install script from dotnet/cli repo
 
-#make path absolute
-$repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
-$outDir = [io.path]::combine($repoDir, $outDir)
+New-Item -Force -ItemType directory -Path "$InstallScriptDir"
 
-#cleanup
-Write-Host "cleanup '$outDir'"
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1" -OutFile "$InstallScriptDir\install.ps1"
 
-if (Test-Path $outDir)
-{
-    rm -Recurse $outDir
-}
+# install a specific dotnet/cli version in DOTNET_INSTALL_DIR directory
+$env:DOTNET_INSTALL_DIR = "$OutDir"
+& "$InstallScriptDir\install.ps1" -Channel beta -version $Version
 
-#download repository
-
-$tempPath = [System.IO.Path]::GetTempFileName()
-
-Write-Host "Temp zip path '$tempPath'"
-
-Invoke-WebRequest -UseBasicParsing $cliLatestPackage -OutFile $tempPath
-
-# extract zip
-
-Write-Host "Extract zip to '$outDir'"
-
-Add-Type -assembly "system.io.compression.filesystem"
-[io.compression.zipfile]::ExtractToDirectory($tempPath, $outDir)
-
-# done
-Write-Host "Done."
+# add dotnet to PATH
+$env:Path = "$OutDir\cli\bin;$env:Path"
