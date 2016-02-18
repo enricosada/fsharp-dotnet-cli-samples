@@ -2,7 +2,7 @@ os: Visual Studio 2015
 
 environment:
   matrix:
-    - CLI_ALIAS: 1.0.0.001461
+    - CLI_ALIAS: lkg
       CLI_BINARIES_VERSION: 1.0.0.001461
     - CLI_ALIAS: latest
       CLI_BINARIES_VERSION: Latest
