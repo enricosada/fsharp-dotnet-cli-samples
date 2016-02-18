@@ -15,13 +15,13 @@ install:
   - ps: Write-Host $env:CLI_ALIAS
   - ps: .\scripts\show-dotnet-info.ps1
   - ps: >-
-      $root = "$pwd"
+      $root = "$pwd";
       if ($env:CLI_REPO_URL) {
-          Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'"
-          .\scripts\download-and-build-cli.ps1 -RepoZipUrl "$env:CLI_REPO_URL" -OutDir "$root\.dotnet\$env:CLI_ALIAS"
+          Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'";
+          .\scripts\download-and-build-cli.ps1 -RepoZipUrl "$env:CLI_REPO_URL" -OutDir "$root\.dotnet\$env:CLI_ALIAS";
       } else {
-          Write-Host "download binaries '$env:CLI_BINARIES_VERSION' as '$env:CLI_ALIAS'"
-          .\scripts\download-cli-binaries.ps1 -OutDir "$root\.dotnet\$env:CLI_ALIAS" -Version "$env:CLI_BINARIES_VERSION" -InstallScriptDir "$root\scripts\obtain"
+          Write-Host "download binaries '$env:CLI_BINARIES_VERSION' as '$env:CLI_ALIAS'";
+          .\scripts\download-cli-binaries.ps1 -OutDir "$root\.dotnet\$env:CLI_ALIAS" -Version "$env:CLI_BINARIES_VERSION" -InstallScriptDir "$root\scripts\obtain";
       }
 
 build_script:
