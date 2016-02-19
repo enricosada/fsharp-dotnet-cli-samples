@@ -15,11 +15,16 @@ addons:
     - zlib1g
 
 before_install:
-  - if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
+  #- if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
+  - curl -OL https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-osx-x64.latest.pkg
+  - sudo installer -verbose -pkg ./dotnet-osx-x64.latest.pkg -target /
+  - echo $PATH
+  - /usr/local/share/dotnet/bin/dotnet --version
+  - ls /usr/local/share/dotnet/bin
+  - ls /usr/local/bin
 
 os:
-  - linux
   - osx
 
 script:
-  - ./scripts/ci-build.sh
+  - which dotnet
