@@ -14,17 +14,28 @@ addons:
     - libunwind8
     - zlib1g
 
-before_install:
-  #- if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
-  - curl -OL https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-osx-x64.latest.pkg
-  - sudo installer -verbose -pkg ./dotnet-osx-x64.latest.pkg -target /
-  - echo $PATH
-  - /usr/local/share/dotnet/bin/dotnet --version
-  - ls /usr/local/share/dotnet/bin
-  - ls /usr/local/bin
-
 os:
   - osx
 
+before_install:
+  #- if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
+
+  - chmod +x ./scripts/show-dotnet-info.sh
+  - ./scripts/show-dotnet-info.sh
+  # Download script to install dotnet cli
+  - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh -o ./scripts/obtain/install.sh
+  - chmod +x ./scripts/obtain/install.sh
+  - ./scripts/obtain/install.sh --channel "beta" --version "Latest"
+
 script:
-  - which dotnet
+  - ./scripts/show-dotnet-info.sh
+  # Run dotnet new 
+  - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
+  - dotnet new --lang f#
+  - dotnet restore
+  - dotnet build
+  - dotnet run a b
+  - popd
+  # Run all tests 
+  - ./scripts/run-tests.sh
+
