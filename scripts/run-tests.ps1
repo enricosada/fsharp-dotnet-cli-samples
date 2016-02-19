@@ -1,9 +1,11 @@
 #make path absolute
-$repoDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
+$rootDir = Split-Path -parent (Split-Path -parent $PSCommandPath)
 
 # restore and compile
 
-Push-Location "$repoDir\HelloConsole"
+Write-Host "Testing HelloConsole..."
+
+Push-Location "$rootDir\HelloConsole"
 
 dotnet restore
 if ($LastExitCode -ne 0) {
@@ -19,7 +21,12 @@ Pop-Location
 
 # dotnet new
 
-Push-Location "$repoDir\test\test-dotnet-new"
+Write-Host "Testing dotnet new..."
+
+Remove-Item "$rootDir\test\test-dotnet-new" -Recurse -ErrorAction Ignore
+
+mkdir "$rootDir\test\test-dotnet-new" -Force | Push-Location
+
 if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
@@ -38,3 +45,10 @@ dotnet build
 if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
+
+dotnet run a b
+if ($LastExitCode -ne 0) {
+    throw "Command failed with exit code $LastExitCode."
+}
+
+Pop-Location

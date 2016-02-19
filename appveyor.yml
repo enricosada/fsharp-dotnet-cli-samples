@@ -3,29 +3,29 @@ os: Visual Studio 2015
 environment:
   matrix:
     - CLI_ALIAS: lkg
-      CLI_BINARIES_VERSION: 1.0.0.001461
+      CLI_VERSION: 1.0.0.001461
     - CLI_ALIAS: latest
-      CLI_BINARIES_VERSION: Latest
-    #- CLI_ALIAS: stabledev
-    #  CLI_REPO_URL: https://github.com/enricosada/cli/archive/fix_dotnet_compile_fsc.zip
-    #- CLI_ALIAS: rel-1.0.0
-    #  CLI_REPO_URL: https://github.com/dotnet/cli/archive/rel/1.0.0.zip
+      CLI_VERSION: Latest
 
 install:
-  - ps: Write-Host $env:CLI_ALIAS
   - ps: .\scripts\show-dotnet-info.ps1
-  - ps: >-
-      $root = "$pwd";
-      if ($env:CLI_REPO_URL) {
-          Write-Host "download and build repo from '$env:CLI_REPO_URL' as '$env:CLI_ALIAS'";
-          .\scripts\download-and-build-cli.ps1 -RepoZipUrl "$env:CLI_REPO_URL" -OutDir "$root\.dotnet\$env:CLI_ALIAS";
-      } else {
-          Write-Host "download binaries '$env:CLI_BINARIES_VERSION' as '$env:CLI_ALIAS'";
-          .\scripts\download-cli-binaries.ps1 -OutDir "$root\.dotnet\$env:CLI_ALIAS" -Version "$env:CLI_BINARIES_VERSION" -InstallScriptDir "$root\scripts\obtain";
-      }
+  # Download an install dotnet cli msi package
+  - ps: Start-FileDownload "https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/$env:CLI_VERSION/dotnet-win-x64.$( $env:CLI_VERSION.ToLower() ).exe" -FileName "dotnet-win-x64.exe"
+  - ps: Start-Process "dotnet-win-x64.exe" "-install -quiet" -Wait
+  # set DOTNET_HOME env var and add dotnet bin to PATH
+  - ps: $env:DOTNET_HOME = "$env:ProgramFiles\dotnet\bin"
+  - ps: $env:Path = "$env:DOTNET_HOME;$env:Path"
 
 build_script:
   - ps: .\scripts\show-dotnet-info.ps1
+  # Run dotnet new 
+  - ps: mkdir "test\test-dotnet-new" -Force | Push-Location
+  - ps: dotnet new --lang f#
+  - ps: dotnet restore
+  - ps: dotnet build
+  - ps: dotnet run a b
+  - ps: Pop-Location
+  # Run all tests 
   - ps: .\scripts\run-tests.ps1
 
 
