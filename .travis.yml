@@ -20,11 +20,10 @@ os:
 before_install:
   #- if test "$TRAVIS_OS_NAME" == "osx"; then brew update; brew install icu4c; fi
 
-  - chmod +x ./scripts/show-dotnet-info.sh
-  - ./scripts/show-dotnet-info.sh
   # Download script to install dotnet cli
   - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh -o ./scripts/obtain/install.sh
-  - chmod +x ./scripts/obtain/install.sh
+  - find ./scripts -name "*.sh" -exec chmod +x {} \;
+  - ./scripts/show-dotnet-info.sh
   - ./scripts/obtain/install.sh --channel "beta" --version "Latest"
 
 script:
@@ -37,6 +36,4 @@ script:
   - dotnet run a b
   - popd
   # Run all tests 
-  - chmod +x ./scripts/run-tests.sh
   - ./scripts/run-tests.sh
-
