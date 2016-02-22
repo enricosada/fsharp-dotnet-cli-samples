@@ -2,6 +2,8 @@
  
 [F#](http://fsharp.org/) and the [.NET CLI](http://dotnet.github.io/) working together
 
+**More info about F# and .NET CLI in the [wiki](https://github.com/enricosada/fsharp-dotnet-cli-samples/wiki)**
+
 This repository build F# projects using dotnet/cli from:
 
 | alias       |     |
