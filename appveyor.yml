@@ -9,11 +9,13 @@ environment:
 
 install:
   - ps: .\scripts\show-dotnet-info.ps1
-  # Download an install dotnet cli msi package
-  - ps: Start-FileDownload "https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/$env:CLI_VERSION/dotnet-win-x64.$( $env:CLI_VERSION.ToLower() ).exe" -FileName "dotnet-win-x64.exe"
-  - ps: Start-Process "dotnet-win-x64.exe" "-install -quiet" -Wait
+  # Download install script to install .NET cli in .dotnet dir
+  - ps: mkdir -Force ".\scripts\obtain\" | Out-Null
+  - ps: Invoke-WebRequest "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1" -OutFile ".\scripts\obtain\install.ps1"
+  - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnet"
+  - ps: '& .\scripts\obtain\install.ps1 -Channel "beta" -version "$env:CLI_VERSION"'
   # set DOTNET_HOME env var and add dotnet bin to PATH
-  - ps: $env:DOTNET_HOME = "$env:ProgramFiles\dotnet\bin"
+  - ps: $env:DOTNET_HOME = "$env:DOTNET_INSTALL_DIR\cli\bin"
   - ps: $env:Path = "$env:DOTNET_HOME;$env:Path"
 
 build_script:
