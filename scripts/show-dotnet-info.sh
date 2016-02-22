@@ -1,6 +1,6 @@
 
 which dotnet
-if [ $? -e 0 ]; then
+if [ $? -eq 0 ]; then
 	echo "Using dotnet:"
 	dotnet --version
 else
