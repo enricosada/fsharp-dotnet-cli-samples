@@ -29,6 +29,8 @@ before_install:
 
 script:
   - ./scripts/show-dotnet-info.sh
+  # Workaround
+  - tar -xvf "./workarounds/1/osx.10.10-x64.zip" -C /usr/local/share/dotnet/bin/
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang f#
