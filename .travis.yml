@@ -37,6 +37,7 @@ before_install:
   - find ./scripts -name "*.sh" -exec chmod +x {} \;
   - ./scripts/show-dotnet-info.sh
   - sudo ./scripts/obtain/install.sh --channel "beta" --version "$CLI_VERSION"
+  - ls /usr/local/share/dotnet/cli/
 
 script:
   - ./scripts/show-dotnet-info.sh
