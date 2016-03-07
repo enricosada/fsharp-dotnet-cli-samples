@@ -40,7 +40,7 @@ before_install:
 script:
   - ./scripts/show-dotnet-info.sh
   # Workaround fsc doesnt work
-  - sudo curl -L -s https://github.com/enricosada/fsharp-dotnet-cli-samples/raw/master/workarounds/1/osx.10.10-x64.zip | tar xvf - -C /usr/local/share/dotnet/cli/bin/
+  - if test "$TRAVIS_OS_NAME" == "osx"; then sudo curl -L -s https://github.com/enricosada/fsharp-dotnet-cli-samples/raw/master/workarounds/1/osx.10.10-x64.zip | tar xvf - -C /usr/local/share/dotnet/cli/bin/ ; fi
   # Workaround "Too many open files"
   - ulimit -n 1024
   # Run dotnet new 
