@@ -12,7 +12,7 @@ if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
 
-dotnet build
+dotnet --verbose build
 if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
@@ -41,12 +41,12 @@ if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
 
-dotnet build
+dotnet --verbose build
 if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
 
-dotnet run a b
+dotnet --verbose run a b
 if ($LastExitCode -ne 0) {
     throw "Command failed with exit code $LastExitCode."
 }
