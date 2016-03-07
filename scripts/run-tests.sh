@@ -1,5 +1,5 @@
 #make path absolute
-RootDir=$(dirname $0)
+RootDir=$(dirname $(dirname $0))
 
 # restore and compile
 
