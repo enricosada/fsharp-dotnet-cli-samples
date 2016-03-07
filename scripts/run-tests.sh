@@ -1,18 +1,18 @@
 #make path absolute
-RootDir = $(dirname $0)
+RootDir=$(dirname $0)
 
 # restore and compile
 
 echo "Testing HelloConsole..."
 
-pushd "${RootDir}/HelloConsole"
+pushd "$RootDir/HelloConsole"
 
 dotnet restore
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-dotnet build
+dotnet --verbose build
 if [ $? -ne 0 ]; then
     exit 1
 fi
@@ -23,9 +23,9 @@ popd
 
 echo "Testing dotnet new..."
 
-rm -rf "${RootDir}/test/test-dotnet-new"
+rm -rf "$RootDir/test/test-dotnet-new"
 
-mkdir -p "${RootDir}/test/test-dotnet-new" && pushd "${RootDir}/test/test-dotnet-new"
+mkdir -p "$RootDir/test/test-dotnet-new" && pushd "$RootDir/test/test-dotnet-new"
 
 if [ $? -ne 0 ]; then
     exit 1
@@ -41,12 +41,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-dotnet build
+dotnet --verbose build
 if [ $? -ne 0 ]; then
     exit 1
 fi
 
-dotnet run a b
+dotnet --verbose run a b
 if [ $? -ne 0 ]; then
     exit 1
 fi
