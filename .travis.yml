@@ -34,9 +34,9 @@ script:
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang f#
-  - dotnet restore
-  - dotnet build
-  - dotnet run a b
+  - dotnet --verbose restore
+  - dotnet --verbose build
+  - dotnet --verbose run a b
   - popd
   # Run all tests 
   - ./scripts/run-tests.sh
