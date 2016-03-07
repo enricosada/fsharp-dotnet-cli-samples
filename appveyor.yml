@@ -9,6 +9,11 @@ environment:
     - CLI_ALIAS: latest
       CLI_VERSION: Latest
 
+matrix:
+  allow_failures:
+    - environment: 
+      - CLI_ALIAS: latest
+
 install:
   - ps: .\scripts\show-dotnet-info.ps1
   # Download install script to install .NET cli in .dotnet dir
