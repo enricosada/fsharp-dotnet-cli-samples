@@ -37,9 +37,9 @@ before_install:
 
 script:
   - ./scripts/show-dotnet-info.sh
-  # Workaround
+  # Workaround fsc doesnt work
   - sudo tar -xvf "./workarounds/1/osx.10.10-x64.zip" -C /usr/local/share/dotnet/cli/
-  - ulimit
+  # Workaround "Too many open files"
   - ulimit -n 1024
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
