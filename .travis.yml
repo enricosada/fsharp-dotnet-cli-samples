@@ -23,9 +23,9 @@ os:
 
 env:
   matrix:
-    - CLI_VERSION="Latest"
     - CLI_VERSION="1.0.0.001494"
-    - CLI_VERSION="1.0.0.001598"
+    #- CLI_VERSION="1.0.0.001598" #next_lkg
+    - CLI_VERSION="Latest"
 
 matrix:
   allow_failures:
@@ -40,7 +40,6 @@ before_install:
   - find ./scripts -name "*.sh" -exec chmod +x {} \;
   - ./scripts/show-dotnet-info.sh
   - sudo ./scripts/obtain/install.sh --channel "beta" --version "$CLI_VERSION"
-  - ls /usr/local/share/dotnet/cli/
 
 script:
   - ./scripts/show-dotnet-info.sh
