@@ -4,6 +4,9 @@ language: c++
 sudo: required
 dist: trusty
 
+#dotnet cli require OSX 10.10
+osx_image: xcode7.1
+
 addons:
   apt:
     packages:
