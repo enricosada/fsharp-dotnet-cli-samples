@@ -45,7 +45,7 @@ script:
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang f#
-  - dotnet --verbose restore
+  - dotnet restore
   - dotnet --verbose build
   - dotnet --verbose run a b
   - popd
