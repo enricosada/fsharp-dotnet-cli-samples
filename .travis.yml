@@ -37,7 +37,6 @@ before_install:
 
 script:
   - ./scripts/show-dotnet-info.sh
-  - ls /usr/local/share/dotnet/cli/
   - ls /usr/local/share/dotnet/cli/bin
   # Workaround fsc doesnt work
   - sudo tar -xvf "./workarounds/1/osx.10.10-x64.zip" -C /usr/local/share/dotnet/cli/bin/
