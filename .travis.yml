@@ -39,7 +39,8 @@ before_install:
   - curl -L --create-dirs https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh -o ./scripts/obtain/install.sh
   - find ./scripts -name "*.sh" -exec chmod +x {} \;
   - ./scripts/show-dotnet-info.sh
-  - sudo ./scripts/obtain/install.sh --channel "beta" --version "$CLI_VERSION"
+  # use bash to workaround bug https://github.com/dotnet/cli/issues/1725
+  - sudo bash ./scripts/obtain/install.sh --channel "beta" --version "$CLI_VERSION"
 
 script:
   - ./scripts/show-dotnet-info.sh
