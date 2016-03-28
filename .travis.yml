@@ -41,7 +41,7 @@ before_install:
   - find ./scripts -name "*.sh" -exec chmod +x {} \;
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetcli"
   # use bash to workaround bug https://github.com/dotnet/cli/issues/1725
-  - sudo bash ./scripts/obtain/install.sh --channel "future" --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
+  - sudo bash ./scripts/obtain/install.sh --channel "preview" --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR" --no-path
   # set DOTNET_HOME env var and add dotnet bin to PATH
   - export PATH="$DOTNET_INSTALL_DIR:$PATH"
 

@@ -15,7 +15,7 @@ install:
   - ps: mkdir -Force ".\scripts\obtain\" | Out-Null
   - ps: Invoke-WebRequest "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1" -OutFile ".\scripts\obtain\install.ps1"
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetcli"
-  - ps: '& .\scripts\obtain\install.ps1 -Channel "future" -version "$env:CLI_VERSION" -InstallDir "$env:DOTNET_INSTALL_DIR" -NoPath'
+  - ps: '& .\scripts\obtain\install.ps1 -Channel "preview" -version "$env:CLI_VERSION" -InstallDir "$env:DOTNET_INSTALL_DIR" -NoPath'
   # set DOTNET_HOME env var and add dotnet bin to PATH
   - ps: $env:DOTNET_HOME = "$env:DOTNET_INSTALL_DIR\cli\bin"
   - ps: $env:Path = "$env:DOTNET_HOME;$env:Path"
