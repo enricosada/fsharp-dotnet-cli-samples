@@ -20,8 +20,6 @@ install:
   # set DOTNET_HOME env var and add dotnet bin to PATH
   - ps: $env:DOTNET_HOME = "$env:DOTNET_INSTALL_DIR\cli\bin"
   - ps: $env:Path = "$env:DOTNET_HOME;$env:Path"
-  # Workaround "missing default.win32manifest"
-  - ps: Invoke-WebRequest "https://raw.githubusercontent.com/Microsoft/visualfsharp/coreclr/src/windows/default.win32manifest" -OutFile "$env:DOTNET_INSTALL_DIR\sdk\1.0.0-beta-002060\default.win32manifest"
 
 build_script:
   - ps: .\scripts\show-dotnet-info.ps1

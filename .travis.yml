@@ -45,8 +45,6 @@ before_install:
   - sudo bash ./scripts/obtain/install.sh --channel "beta" --version "$CLI_VERSION" --install-dir "$DOTNET_INSTALL_DIR"
   # set DOTNET_HOME env var and add dotnet bin to PATH
   - export PATH="$DOTNET_INSTALL_DIR:$PATH"
-  # Workaround "missing default.win32manifest"
-  - sudo curl -L "https://raw.githubusercontent.com/Microsoft/visualfsharp/coreclr/src/windows/default.win32manifest" -o "$DOTNET_INSTALL_DIR/sdk/1.0.0-beta-002060/default.win32manifest"
 
 script:
   - ./scripts/show-dotnet-info.sh
