@@ -23,6 +23,8 @@ install:
 
 build_script:
   - ps: .\scripts\show-dotnet-info.ps1
+  # dotnet info
+  - ps: dotnet --info
   # Run dotnet new 
   - ps: mkdir "test\test-dotnet-new" -Force | Push-Location
   - ps: dotnet new --lang f#

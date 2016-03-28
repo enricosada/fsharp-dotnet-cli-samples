@@ -50,6 +50,8 @@ script:
   - ./scripts/show-dotnet-info.sh
   # Workaround "Too many open files"
   - ulimit -n 1024
+  # dotnet info
+  - dotnet --info
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang f#
