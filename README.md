@@ -11,14 +11,7 @@ This repository build F# projects using dotnet/cli from:
 
 | alias       |     |
 |-------------|-----|
-| `latest`    | Latest dotnet cli binaries (see http://dotnet.github.io/getting-started/ ) |
-| `lkg`       | Latest known good cli binaries, current is 1.0.0.001494 |
+| `latest`    | Latest dotnet cli binaries (see [dotnet/cli README](https://github.com/dotnet/cli/blob/rel/1.0.0/README.md) ) |
+| `lkg`       | Latest known good cli binaries, current is 1.0.0-beta-002071 |
 
-More info about [Status in the wiki](https://github.com/enricosada/fsharp-dotnet-cli-samples/wiki/Status)
-
-### Current Last Known Good
-
-|         |Windows |Mac OS X |
-|---------|:------:|:-------:|
-|**Installers**|[Download Msi](https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001494/dotnet-win-x64.1.0.0.001494.exe)|[Download Pkg](https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/1.0.0.001494/dotnet-osx-x64.1.0.0.001494.pkg) |
-|**Binaries**|[Download zip file](https://dotnetcli.blob.core.windows.net/dotnet/beta/Binaries/1.0.0.001494/dotnet-win-x64.1.0.0.001494.zip)|[Download tar file](https://dotnetcli.blob.core.windows.net/dotnet/beta/Binaries/1.0.0.001494/dotnet-osx-x64.1.0.0.001494.tar.gz) |
+More info (with direct download links) in [Status in the wiki](https://github.com/enricosada/fsharp-dotnet-cli-samples/wiki/Status)
