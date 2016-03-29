@@ -26,6 +26,10 @@ env:
     - CLI_VERSION=1.0.0-beta-002071
     - CLI_VERSION=Latest
 
+matrix:
+  allow_failures:
+    - env: CLI_VERSION=Latest
+
 before_install:
   - find ./scripts -name "*.sh" -exec chmod +x {} \;
   - ./scripts/show-dotnet-info.sh
