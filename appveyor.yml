@@ -6,7 +6,9 @@ install:
   # Download .NET Core SDK and add to PATH
   - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
   - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
-  - ps: New-TemporaryFile | % { Rename-Item $_ ($_.FullName + ".zip") -PassThru } | % { (New-Object System.Net.WebClient).DownloadFile($url, $_.FullName); $_ } | Expand-Archive -DestinationPath $env:DOTNET_INSTALL_DIR
+  - ps: $tempFile = [System.IO.Path]::GetTempFileName() | % { [System.IO.Path]::ChangeExtension($_, ".zip") }
+  - ps: (New-Object System.Net.WebClient).DownloadFile($url, $tempFile)
+  - ps: $tempFile | Expand-Archive -DestinationPath $env:DOTNET_INSTALL_DIR
   - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
 
 build_script:
