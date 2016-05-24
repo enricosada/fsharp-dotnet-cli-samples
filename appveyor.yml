@@ -1,26 +1,15 @@
 os: Visual Studio 2015
 
-environment:
-  matrix:
-    - CLI_VERSION: 1.0.0-beta-002071
-    - CLI_VERSION: Latest
-
-matrix:
-  allow_failures:
-    - CLI_VERSION: Latest
-
 install:
-  - ps: .\scripts\show-dotnet-info.ps1
-  # Download install script to install .NET cli in .dotnet dir
-  - ps: mkdir -Force ".\scripts\obtain\" | Out-Null
-  - ps: Invoke-WebRequest "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.ps1" -OutFile ".\scripts\obtain\install.ps1"
-  - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetcli"
-  - ps: '& .\scripts\obtain\install.ps1 -Channel "preview" -version "$env:CLI_VERSION" -InstallDir "$env:DOTNET_INSTALL_DIR" -NoPath'
-  # add dotnet to PATH
+  # .NET Core SDK binaries
+  - ps: $url = https://go.microsoft.com/fwlink/?LinkID=798402 # v1.0.0-preview1 x64
+  # Download .NET Core SDK and add to PATH
+  - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
+  - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
+  - ps: New-TemporaryFile | % { Rename-Item $_ ($_.FullName + ".zip") -PassThru } | % { (New-Object System.Net.WebClient).DownloadFile($url, $_.FullName); $_ } | Expand-Archive -DestinationPath $env:DOTNET_INSTALL_DIR
   - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
 
 build_script:
-  - ps: .\scripts\show-dotnet-info.ps1
   # dotnet info
   - ps: dotnet --info
   # Run dotnet new 
@@ -30,8 +19,6 @@ build_script:
   - ps: dotnet --verbose build
   - ps: dotnet --verbose run a b
   - ps: Pop-Location
-  # Run all tests 
-  - ps: .\scripts\run-tests.ps1
 
 
 test: off 
