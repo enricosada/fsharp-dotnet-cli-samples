@@ -16,7 +16,7 @@ build_script:
   - ps: dotnet --info
   # Run dotnet new 
   - ps: mkdir "test\test-dotnet-new" -Force | Push-Location
-  - ps: dotnet new --lang f#
+  - ps: dotnet new --lang fsharp
   - ps: dotnet restore
   - ps: dotnet --verbose build
   - ps: dotnet --verbose run a b
