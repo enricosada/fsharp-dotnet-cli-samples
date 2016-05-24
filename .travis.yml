@@ -39,6 +39,5 @@ script:
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang fsharp
   - dotnet restore
-  - dotnet --verbose build
   - dotnet --verbose run a b
   - popd
