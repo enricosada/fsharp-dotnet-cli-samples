@@ -38,6 +38,8 @@ script:
   # Run dotnet new 
   - mkdir -p "test/test-dotnet-new" && pushd "test/test-dotnet-new"
   - dotnet new --lang fsharp
+  - echo 'dotnet restore' && echo -en 'travis_fold:start:dotnet_restore'
   - dotnet restore
+  - echo -en 'travis_fold:end:dotnet_restore'
   - dotnet --verbose run a b
   - popd
