@@ -3,12 +3,15 @@ os: Visual Studio 2015
 build_script:
   # dotnet info
   - ps: dotnet --info
-  # Run dotnet new 
-  - ps: mkdir "test\test-dotnet-new" -Force | Push-Location
-  - ps: dotnet new --lang fsharp
+  # Run example: console
+  - ps: Push-Location .\examples\preview2\lib\
   - ps: dotnet restore
   - ps: dotnet --verbose build
-  - ps: dotnet --verbose run a b
+  - ps: Pop-Location
+  # Run example: console
+  - ps: Push-Location .\examples\preview2\console\
+  - ps: dotnet restore
+  - ps: dotnet --verbose run -- a b
   - ps: Pop-Location
 
 
