@@ -1,9 +1,9 @@
 language: csharp
 
+mono: none
+dotnet: 1.0.0-preview2-003121
+
 matrix:
-  global:
-    - mono: none
-    - dotnet: 1.0.0-preview2-003121
   include:
     - os: linux # Ubuntu 14.04
       dist: trusty
