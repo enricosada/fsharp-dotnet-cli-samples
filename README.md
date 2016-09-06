@@ -12,6 +12,6 @@ This repository build F# projects using dotnet/cli from:
 | alias       |     |
 |-------------|-----|
 | `latest`    | Latest dotnet cli binaries (see [dotnet/cli README](https://github.com/dotnet/cli/blob/rel/1.0.0/README.md) ) |
-| `lkg`       | Latest known good cli binaries, current is 1.0.0-beta-002071 |
+| `lkg`       | Latest known good cli binaries, current is 1.0.0-preview2-003121 |
 
 More info (with direct download links) in [Status in the wiki](https://github.com/enricosada/fsharp-dotnet-cli-samples/wiki/Status)
