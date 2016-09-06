@@ -1,6 +1,6 @@
 # F# samples using .NET CLI
 
-[![Build Status]([![Build Status](https://travis-ci.org/enricosada/fsharp-dotnet-cli-samples.svg?branch=rel%2F1.0.0-preview2)](https://travis-ci.org/enricosada/fsharp-dotnet-cli-samples))](https://travis-ci.org/enricosada/fsharp-dotnet-cli-samples/branches)
+[![Build Status](https://travis-ci.org/enricosada/fsharp-dotnet-cli-samples.svg?branch=rel%2F1.0.0-preview2)](https://travis-ci.org/enricosada/fsharp-dotnet-cli-samples)
 [![Build Status](https://ci.appveyor.com/api/projects/status/fjyw71v46oyftr3d/branch/rel/1.0.0-preview2?svg=true)](https://ci.appveyor.com/project/enricosada/fsharp-dotnet-cli-samples/branch/rel/1.0.0-preview2)
  
 [F#](http://fsharp.org/) and the [.NET CLI](http://dotnet.github.io/) working together
